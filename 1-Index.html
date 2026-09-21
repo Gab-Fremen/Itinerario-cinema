@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="index-page">
+    <button id="corruptBtn">
+      <img style="width: 60px; height: 60px;" src="Red-X-PNG-Pic.png" alt="Descrição da imagem">
+    </button>
+      <div id="corruption">
+        <div class="corrupt-fragments"></div>
+      </div>
+    <header>
+        <h1>Começar pesquisa?</h1>
+    </header>
+
+    <main>
+        <section>
+            <a href="2-Bomdia.html">
+            <button>SIM</button>
+                </a>
+        </section>
+
+        <section>
+            <button>NÃO</button>
+        </section>
+
+<script src="Script.js"></script>
+
+<style>
+body {
+    opacity: 0;
+    filter: blur(10px) brightness(0.7);
+    transform: scale(0.98);
+
+    animation: darkReveal 3s ease-in-out forwards;
+}
+
+@keyframes darkReveal {
+    0% {
+        opacity: 0;
+        filter: blur(10px) brightness(0.7);
+        transform: scale(0.7);
+    }
+
+
+    100% {
+        opacity: 1;
+        filter: blur(0) brightness(1);
+        transform: scale(1);
+    }
+}
+</style>
+</html>

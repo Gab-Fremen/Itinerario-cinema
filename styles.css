@@ -1,0 +1,1793 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    background: #000;
+}
+
+body {
+    min-height: 100vh;
+
+    background: #000;
+    color: #fff;
+
+    font-family: "Courier New", Courier, monospace;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+
+
+/* =========================================================
+   BOTÃO X
+========================================================= */
+
+body > button:first-child {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+
+    width: 60px;
+    height: 60px;
+
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    outline: none;
+
+    cursor: pointer;
+
+    z-index: 9999;
+
+    /* Sem hover */
+    transition: none;
+}
+
+.close {
+    width: 60px !important;
+    height: 60px !important;
+
+    display: block;
+
+    transition: none !important;
+
+    filter: none;
+}
+
+body > button:first-child:hover .close {
+    transform: none;
+    filter: none;
+}
+
+body > button:first-child:active .close {
+    transform: none;
+    filter: none;
+}
+
+
+/* =========================================================
+   CORRUPÇÃO AO PRESSIONAR X
+========================================================= */
+
+body:has(> button:first-child:active) {
+    animation: x-screen-shake 0.18s steps(1) both;
+}
+
+body:has(> button:first-child:active)::before {
+    content: "";
+
+    position: fixed;
+
+    inset: -15%;
+
+    z-index: 9998;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 8px,
+            rgba(120, 0, 0, 0.28) 9px,
+            rgba(0, 0, 0, 0) 12px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0) 0px,
+            rgba(0, 0, 0, 0) 18px,
+            rgba(90, 0, 0, 0.18) 19px,
+            rgba(0, 0, 0, 0) 25px
+        ),
+        radial-gradient(
+            circle at center,
+            rgba(160, 0, 0, 0.58) 0%,
+            rgba(70, 0, 0, 0.32) 35%,
+            rgba(0, 0, 0, 0.95) 85%
+        );
+
+    mix-blend-mode: screen;
+
+    animation: x-red-corruption 0.18s steps(1) both;
+}
+
+@keyframes x-screen-shake {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    15% {
+        transform: translate(-9px, 4px);
+    }
+
+    30% {
+        transform: translate(11px, -5px);
+    }
+
+    45% {
+        transform: translate(-14px, -2px);
+    }
+
+    60% {
+        transform: translate(12px, 5px);
+    }
+
+    75% {
+        transform: translate(-6px, -3px);
+    }
+
+    90% {
+        transform: translate(4px, 2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes x-red-corruption {
+
+    0% {
+        opacity: 0;
+        transform: translate(0, 0);
+        filter: none;
+    }
+
+    15% {
+        opacity: 0.9;
+        transform: translate(-14px, 4px) scale(1.03);
+        filter: contrast(2);
+    }
+
+    30% {
+        opacity: 0.35;
+        transform: translate(18px, -3px) scale(0.98);
+    }
+
+    45% {
+        opacity: 0.95;
+        transform: translate(-20px, 5px) scale(1.05);
+    }
+
+    60% {
+        opacity: 0.18;
+        transform: translate(15px, -6px);
+    }
+
+    75% {
+        opacity: 0.75;
+        transform: translate(-8px, 2px);
+    }
+
+    90% {
+        opacity: 0.25;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(0, 0);
+    }
+}
+
+
+/* =========================================================
+   CABEÇALHO / PERGUNTAS
+========================================================= */
+
+header {
+    width: 100%;
+
+    min-height: 42vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 100px 8vw 30px;
+}
+
+header h1 {
+    width: min(1100px, 90vw);
+
+    color: #fff;
+
+    font-size: clamp(32px, 4vw, 64px);
+
+    font-weight: 400;
+
+    line-height: 1.15;
+
+    letter-spacing: 2px;
+
+    text-align: center;
+
+    text-shadow:
+        0 0 1px #fff;
+}
+
+
+/* =========================================================
+   OPÇÕES
+========================================================= */
+
+main {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 10px 20px 60px;
+}
+
+section {
+    width: min(500px, 85vw);
+}
+
+section a {
+    display: block;
+
+    width: 100%;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+section button {
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 14px 28px;
+
+    background: #000;
+
+    color: #fff;
+
+    border: 2px solid #fff;
+
+    outline: none;
+
+    font-family: "Courier New", Courier, monospace;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.12s linear,
+        color 0.12s linear,
+        box-shadow 0.12s linear,
+        transform 0.12s linear;
+}
+
+
+/* =========================================================
+   HOVER DOS BOTÕES
+========================================================= */
+
+section button:hover {
+    background: #fff;
+
+    color: #000;
+
+    box-shadow:
+        0 0 0 1px #fff,
+        0 0 16px rgba(255, 255, 255, 0.5);
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   CLIQUE
+========================================================= */
+
+section button:active {
+    transform: translateX(0) scale(0.98);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.corrupted-text {
+ 
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 200px 8vw 30px;
+    
+    overflow: visible;
+
+    z-index: 10;
+
+    color: #ffffff;
+    font-family: "Courier New", monospace;
+    font-size: clamp(10px, 5vw, 100px);
+    font-weight: 900;
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    /* Aparência suja */
+    text-shadow:
+        3px 0 #ff0000,
+        -3px 0 #650000,
+        0 0 8px #ff0000,
+        0 0 30px rgba(255, 0, 0, .5);
+
+    animation:
+        corruption-main .16s infinite steps(2),
+        corruption-shake .8s infinite steps(1);
+
+    filter: contrast(180%);
+}
+
+
+/* DUPLICAÇÃO VERMELHA */
+.corrupted-text::before,
+.corrupted-text::after {
+    content: attr(data-text);
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+
+/* CAMADA VERMELHA */
+.corrupted-text::before {
+    color: #ff0000;
+
+    text-shadow:
+        5px 0 #ff0000,
+        -2px 0 #8b0000;
+
+    clip-path: polygon(
+        0 5%,
+        100% 5%,
+        100% 18%,
+        0 18%,
+
+        0 35%,
+        100% 35%,
+        100% 42%,
+        0 42%,
+
+        0 70%,
+        100% 70%,
+        100% 77%,
+        0 77%
+    );
+
+    animation: corruption-red .12s infinite steps(1);
+}
+
+
+/* CAMADA ESCURA */
+.corrupted-text::after {
+    color: #050000;
+
+    text-shadow:
+        -6px 0 #ff1a1a,
+        4px 0 #400000;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 9%,
+        0 9%,
+
+        0 23%,
+        100% 23%,
+        100% 29%,
+        0 29%,
+
+        0 50%,
+        100% 50%,
+        100% 58%,
+        0 58%,
+
+        0 84%,
+        100% 84%,
+        100% 91%,
+        0 91%
+    );
+
+    animation: corruption-black .09s infinite steps(1);
+}
+
+
+/* ================================================= */
+/* CORRUPÇÃO PRINCIPAL */
+/* ================================================= */
+
+@keyframes corruption-main {
+
+    0% {
+        transform: translate(0);
+    }
+
+    10% {
+        transform: translate(-4px, 2px)
+                   skewX(-2deg);
+    }
+
+    20% {
+        transform: translate(5px, -1px)
+                   skewX(4deg);
+    }
+
+    30% {
+        transform: translate(-2px, 0)
+                   scaleX(1.02);
+    }
+
+    40% {
+        transform: translate(7px, 1px)
+                   skewX(-6deg);
+    }
+
+    50% {
+        transform: translate(-8px, -2px)
+                   scaleX(.98);
+    }
+
+    60% {
+        transform: translate(3px, 2px);
+    }
+
+    70% {
+        transform: translate(-1px, -1px)
+                   skewX(7deg);
+    }
+
+    80% {
+        transform: translate(6px, 0);
+    }
+
+    90% {
+        transform: translate(-5px, 2px)
+                   skewX(-3deg);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+
+/* ================================================= */
+/* MICRO-TREMORES */
+/* ================================================= */
+
+@keyframes corruption-shake {
+
+    0%   { left: 0; }
+    10%  { left: -2px; }
+    20%  { left: 3px; }
+    30%  { left: -1px; }
+    40%  { left: 4px; }
+    50%  { left: -4px; }
+    60%  { left: 2px; }
+    70%  { left: -3px; }
+    80%  { left: 5px; }
+    90%  { left: -2px; }
+    100% { left: 0; }
+}
+
+
+/* ================================================= */
+/* RASGOS VERMELHOS */
+/* ================================================= */
+
+@keyframes corruption-red {
+
+    0% {
+        transform:
+            translate(8px, -2px)
+            skewX(12deg);
+        opacity: .9;
+    }
+
+    20% {
+        transform:
+            translate(-13px, 1px)
+            skewX(-18deg);
+        opacity: .5;
+    }
+
+    40% {
+        transform:
+            translate(4px, 4px)
+            skewX(5deg);
+        opacity: .8;
+    }
+
+    60% {
+        transform:
+            translate(-8px, -3px)
+            skewX(-10deg);
+        opacity: .4;
+    }
+
+    80% {
+        transform:
+            translate(14px, 0)
+            skewX(20deg);
+        opacity: .7;
+    }
+
+    100% {
+        transform:
+            translate(0)
+            skewX(0);
+        opacity: .9;
+    }
+}
+
+
+/* ================================================= */
+/* FRAGMENTOS ESCUROS */
+/* ================================================= */
+
+@keyframes corruption-black {
+
+    0% {
+        transform: translate(-7px, 0);
+        opacity: .8;
+    }
+
+    15% {
+        transform: translate(11px, -2px);
+        opacity: .3;
+    }
+
+    30% {
+        transform: translate(-3px, 3px);
+        opacity: 1;
+    }
+
+    45% {
+        transform: translate(9px, -1px);
+        opacity: .4;
+    }
+
+    60% {
+        transform: translate(-12px, 1px);
+        opacity: .8;
+    }
+
+    75% {
+        transform: translate(4px, -3px);
+        opacity: .5;
+    }
+
+    100% {
+        transform: translate(-7px, 0);
+        opacity: .9;
+    }
+}
+
+
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050000;
+}
+
+.virus-screen {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+
+    color: #ff0000;
+}
+
+
+/* =====================================================
+   TEXTO ORIGINAL
+===================================================== */
+
+.infection-source {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 20;
+
+    font-family: "Courier New", monospace;
+    font-size: clamp(35px, 7vw, 100px);
+    font-weight: 900;
+
+    letter-spacing: 5px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 4px #ff0000,
+        0 0 15px #ff0000,
+        0 0 40px rgba(255, 0, 0, .7);
+
+    animation:
+        source-corruption .12s infinite steps(2),
+        source-pulse 1.8s infinite;
+}
+
+
+/* =====================================================
+   CAMADA DOS CLONES
+===================================================== */
+
+.infection-layer {
+    position: absolute;
+    padding: 0;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   CADA CÓPIA INFECTADA
+===================================================== */
+
+.virus-copy {
+    position: absolute;
+
+    white-space: nowrap;
+
+    font-family: "Courier New", monospace;
+    font-weight: 900;
+
+    font-size: clamp(15px, 3vw, 55px);
+
+    color: #fffdfd;
+
+    pointer-events: none;
+
+    text-shadow:
+        2px 0 #ff0000,
+        -2px 0 #680000,
+        0 0 10px rgba(255, 0, 0, .8);
+
+    animation:
+        virus-spread var(--life) steps(6) forwards,
+        virus-glitch .09s infinite steps(2);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(var(--rotation))
+        skewX(var(--skew));
+}
+
+
+/* =====================================================
+   FRAGMENTO PRETO
+===================================================== */
+
+.virus-copy::before {
+    content: attr(data-text);
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    color: #ffffff;
+
+    transform: translate(
+        var(--offset-x),
+        var(--offset-y)
+    );
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 22%,
+        0 22%,
+
+        0 49%,
+        100% 49%,
+        100% 62%,
+        0 62%,
+
+        0 80%,
+        100% 80%,
+        100% 100%,
+        0 100%
+    );
+}
+
+
+/* =====================================================
+   CAMADA VERMELHA DESLOCADA
+===================================================== */
+
+.virus-copy::after {
+    content: attr(data-text);
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    color: #ff3333;
+
+    transform: translate(
+        calc(var(--offset-x) * -1),
+        var(--offset-y)
+    );
+
+    clip-path: polygon(
+        0 8%,
+        100% 8%,
+        100% 19%,
+        0 19%,
+
+        0 35%,
+        100% 35%,
+        100% 43%,
+        0 43%,
+
+        0 67%,
+        100% 67%,
+        100% 75%,
+        0 75%
+    );
+}
+
+
+/* =====================================================
+   NASCIMENTO DO VÍRUS
+===================================================== */
+
+@keyframes virus-spread {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+    }
+
+    8% {    }
+
+    25% {
+        transform:
+            translate(-50%, -50%)
+            skewX(var(--skew));
+    }
+
+    55% {
+
+        transform:
+            translate(-50%, -50%)
+            skewX(var(--skew));
+    }
+
+    80% {
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            skewX(var(--skew));
+    }
+}
+
+
+/* =====================================================
+   GLITCH VIOLENTO
+===================================================== */
+
+@keyframes virus-glitch {
+
+    0% {
+        margin-left: 0;
+        filter: none;
+    }
+
+    20% {
+        margin-left: -2px;
+
+        filter:
+            contrast(200%)
+            brightness(1.4);
+    }
+
+    40% {
+        margin-left: 6px;
+
+        filter:
+            contrast(300%)
+            brightness(.7);
+    }
+
+    60% {
+        margin-left: -4px;
+
+        filter:
+            contrast(250%);
+    }
+
+    80% {
+        margin-left: 5px;
+
+        filter:
+            contrast(400%)
+            brightness(1.2);
+    }
+
+    100% {
+        margin-left: 0;
+        filter: none;
+    }
+}
+
+
+/* =====================================================
+   TEXTO ORIGINAL
+===================================================== */
+
+@keyframes source-corruption {
+
+    0% {
+        transform:
+            translate(-50%, -50%);
+    }
+
+    20% {
+        transform:
+            translate(-48%, -52%)
+            skewX(-5deg);
+    }
+
+    40% {
+        transform:
+            translate(-52%, -48%)
+            skewX(8deg);
+    }
+
+    60% {
+        transform:
+            translate(-50%, -52%);
+    }
+
+    80% {
+        transform:
+            translate(-52%, -49%)
+            skewX(-7deg);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%);
+    }
+}
+
+
+@keyframes source-pulse {
+
+    0%,
+    100% {
+        filter:
+            contrast(100%)
+            brightness(1);
+    }
+
+    50% {
+        filter:
+            contrast(180%)
+            brightness(1.3);
+    }
+}
+
+
+/* =====================================================
+   LINHAS DE INTERFERÊNCIA
+===================================================== */
+
+.virus-screen::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 30;
+
+    pointer-events: none;
+
+
+    mix-blend-mode: screen;
+
+    animation: scan-lines .08s infinite steps(2);
+}
+
+
+@keyframes scan-lines {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(3px);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.botao-corrompido {
+    position: relative;
+    padding: 18px 42px;
+
+    background: #180000;
+    color: #ff2222;
+
+    border: 2px solid #ff1111;
+    border-radius: 4px;
+
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 5px #ff0000,
+        0 0 15px rgba(255, 0, 0, 0.5),
+        inset 0 0 15px rgba(255, 0, 0, 0.15);
+
+    text-shadow:
+        2px 0 #ff0000,
+        -2px 0 #7a0000;
+
+    animation:
+        corrupcao 0.30s infinite,
+        pulsar 1.7s infinite;
+}
+
+
+/* Tremor principal */
+@keyframes corrupcao {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-2px, 1px) skewX(-1deg);
+    }
+
+    20% {
+        transform: translate(3px, -1px) skewX(1deg);
+    }
+
+    30% {
+        transform: translate(-1px, 2px);
+    }
+
+    40% {
+        transform: translate(2px, -2px) skewX(-2deg);
+    }
+
+    50% {
+        transform: translate(-3px, 0);
+    }
+
+    60% {
+        transform: translate(1px, 2px) skewX(2deg);
+    }
+
+    70% {
+        transform: translate(-2px, -1px);
+    }
+
+    80% {
+        transform: translate(3px, 1px);
+    }
+
+    90% {
+        transform: translate(-1px, -2px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/* Pulso vermelho */
+@keyframes pulsar {
+
+    0%, 100% {
+        box-shadow:
+            0 0 5px #ff0000,
+            0 0 15px rgba(255, 0, 0, 0.4),
+            inset 0 0 10px rgba(255, 0, 0, 0.1);
+    }
+
+    50% {
+        box-shadow:
+            0 0 10px #ff0000,
+            0 0 35px rgba(255, 0, 0, 0.9),
+            inset 0 0 25px rgba(255, 0, 0, 0.3);
+    }
+}
+
+.botao-quasecorrompido {
+    position: relative;
+    padding: 18px 42px;
+
+    animation:
+        corrupcao 0.50s infinite;
+    }
+
+.botao-quasenadacorrompido {
+    position: relative;
+    padding: 18px 42px;
+
+    animation:
+        corrupcao 1s infinite;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+/* =====================================================
+   BASE
+   ===================================================== */
+
+#corruption {
+    position: fixed;
+    inset: 0;
+
+    z-index: 999999;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    visibility: hidden;
+}
+
+
+/* =====================================================
+   ATIVAÇÃO
+   ===================================================== */
+
+body.corrupted {
+    overflow: hidden;
+
+    animation:
+        apocalypse-shake .72s steps(1, end),
+        apocalypse-color .72s steps(1, end);
+}
+
+body.corrupted #corruption {
+    visibility: visible;
+}
+
+
+/* =====================================================
+   DUPLICAÇÕES DA TELA
+   ===================================================== */
+
+#corruption::before,
+#corruption::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    mix-blend-mode: screen;
+}
+
+
+/* cópia vermelha */
+
+#corruption::before {
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255, 0, 0, .65) 4px,
+            transparent 6px
+        );
+
+    transform: translateX(-20px);
+}
+
+
+/* cópia escura */
+
+#corruption::after {
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 8px,
+            rgba(80, 0, 0, .8) 9px,
+            transparent 11px
+        );
+
+    transform: translateX(20px);
+}
+
+
+body.corrupted #corruption::before {
+
+    animation:
+        red-copy .72s steps(1, end);
+}
+
+
+body.corrupted #corruption::after {
+
+    animation:
+        black-copy .72s steps(1, end);
+}
+
+
+/* =====================================================
+   FRAGMENTOS
+   ===================================================== */
+
+.corrupt-fragments {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+}
+
+
+/* cada fragmento */
+
+.corrupt-fragment {
+
+    position: absolute;
+
+    color: #ff0000;
+
+    font-family: monospace;
+
+    font-weight: 900;
+
+    font-size: clamp(
+        12px,
+        2vw,
+        28px
+    );
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+
+    text-shadow:
+        3px 0 #ff0000,
+        -3px 0 #550000,
+        0 0 8px #ff0000;
+
+    opacity: 0;
+
+    transform: translateX(0);
+
+    filter: blur(.2px);
+}
+
+
+/* =====================================================
+   ANIMAÇÃO DOS FRAGMENTOS
+   ===================================================== */
+
+body.corrupted .corrupt-fragment {
+
+    animation:
+        fragment-in .45s steps(2, end) forwards;
+}
+
+
+@keyframes fragment-in {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateX(-150px)
+            scaleX(2);
+
+        clip-path:
+            inset(
+                0 80% 0 0
+            );
+    }
+
+    15% {
+
+        opacity: 1;
+
+        transform:
+            translateX(80px)
+            scaleX(.7);
+
+        clip-path:
+            inset(
+                0 10% 0 0
+            );
+    }
+
+    30% {
+
+        opacity: .7;
+
+        transform:
+            translateX(-40px)
+            scaleX(1.8);
+
+        clip-path:
+            inset(
+                0 40% 0 20%
+            );
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateX(120px)
+            scaleX(.5);
+
+        clip-path:
+            inset(
+                0 20% 0 50%
+            );
+    }
+
+    70% {
+
+        opacity: .5;
+
+        transform:
+            translateX(-80px)
+            scaleX(1.5);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateX(300px)
+            scaleX(3);
+
+        clip-path:
+            inset(
+                0 100% 0 0
+            );
+    }
+}
+
+
+/* =====================================================
+   TELA SENDO RASGADA EM FAIXAS
+   ===================================================== */
+
+body.corrupted > *:not(#corruption) {
+
+    animation:
+        content-tearing .72s steps(1, end);
+}
+
+
+@keyframes content-tearing {
+
+    0% {
+        clip-path: inset(0);
+    }
+
+    10% {
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                100% 18%,
+                3% 18%,
+                3% 24%,
+                100% 24%,
+                100% 100%,
+                0 100%
+            );
+    }
+
+    20% {
+        clip-path:
+            polygon(
+                0 0,
+                97% 0,
+                97% 31%,
+                0 31%,
+                0 40%,
+                100% 40%,
+                100% 100%,
+                0 100%
+            );
+    }
+
+    35% {
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                100% 8%,
+                5% 8%,
+                5% 55%,
+                100% 55%,
+                100% 70%,
+                0 70%,
+                0 100%
+            );
+    }
+
+    50% {
+        clip-path:
+            polygon(
+                0 0,
+                100% 0,
+                100% 100%,
+                0 100%,
+                0 82%,
+                96% 82%,
+                96% 74%,
+                0 74%
+            );
+    }
+
+    65% {
+        clip-path: inset(0);
+    }
+
+    100% {
+        clip-path: inset(0);
+    }
+}
+
+
+/* =====================================================
+   TREMEDEIRA
+   ===================================================== */
+
+@keyframes apocalypse-shake {
+
+    0% {
+        transform: translate(0);
+    }
+
+    5% {
+        transform:
+            translate(-30px, 15px)
+            rotate(-1deg);
+    }
+
+    10% {
+        transform:
+            translate(35px, -20px)
+            rotate(1.5deg);
+    }
+
+    15% {
+        transform:
+            translate(-45px, -10px)
+            rotate(-2deg);
+    }
+
+    20% {
+        transform:
+            translate(30px, 30px)
+            rotate(1deg);
+    }
+
+    25% {
+        transform:
+            translate(-35px, -25px)
+            rotate(-1.5deg);
+    }
+
+    30% {
+        transform:
+            translate(40px, 15px)
+            rotate(2deg);
+    }
+
+    35% {
+        transform:
+            translate(-25px, 35px)
+            rotate(-2deg);
+    }
+
+    40% {
+        transform:
+            translate(30px, -30px)
+            rotate(1.5deg);
+    }
+
+    50% {
+        transform:
+            translate(-40px, 10px)
+            rotate(-2deg);
+    }
+
+    60% {
+        transform:
+            translate(25px, 20px);
+    }
+
+    70% {
+        transform:
+            translate(-15px, -15px);
+    }
+
+    80% {
+        transform:
+            translate(8px, 8px);
+    }
+
+    90% {
+        transform:
+            translate(-3px, -3px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+
+/* =====================================================
+   CORRUPÇÃO DE COR
+   ===================================================== */
+
+@keyframes apocalypse-color {
+
+    0% {
+        filter: none;
+    }
+
+    8% {
+        filter:
+            contrast(4)
+            saturate(10)
+            brightness(.5);
+    }
+
+    15% {
+        filter:
+            contrast(6)
+            saturate(15)
+            hue-rotate(-40deg);
+    }
+
+    25% {
+        filter:
+            contrast(2)
+            brightness(1.8)
+            saturate(15);
+    }
+
+    35% {
+        filter:
+            contrast(7)
+            brightness(.3)
+            saturate(20);
+    }
+
+    50% {
+        filter:
+            contrast(4)
+            saturate(15)
+            hue-rotate(50deg);
+    }
+
+    65% {
+        filter:
+            contrast(2)
+            saturate(8);
+    }
+
+    80% {
+        filter:
+            contrast(1.5)
+            saturate(3);
+    }
+
+    100% {
+        filter: none;
+    }
+}
+
+
+/* =====================================================
+   CÓPIA VERMELHA
+   ===================================================== */
+
+@keyframes red-copy {
+
+    0% {
+        opacity: 0;
+    }
+
+    8% {
+        opacity: 1;
+        transform: translateX(-30px);
+    }
+
+    16% {
+        opacity: .2;
+        transform: translateX(50px);
+    }
+
+    25% {
+        opacity: 1;
+        transform: translateX(-80px);
+    }
+
+    40% {
+        opacity: .3;
+        transform: translateX(100px);
+    }
+
+    55% {
+        opacity: 1;
+        transform: translateX(-50px);
+    }
+
+    70% {
+        opacity: .2;
+        transform: translateX(30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}
+
+
+/* =====================================================
+   CÓPIA ESCURA
+   ===================================================== */
+
+@keyframes black-copy {
+
+    0% {
+        opacity: 0;
+    }
+
+    12% {
+        opacity: .8;
+        transform: translateX(40px);
+    }
+
+    25% {
+        opacity: .2;
+        transform: translateX(-60px);
+    }
+
+    45% {
+        opacity: .9;
+        transform: translateX(90px);
+    }
+
+    60% {
+        opacity: .3;
+        transform: translateX(-30px);
+    }
+
+    80% {
+        opacity: .6;
+        transform: translateX(20px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(0);
+    }
+}

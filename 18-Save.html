@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="refresh" content="5; url=19-Desaparecesse2.html">
+
+
+</head>
+
+<body>
+    <style>
+        body {
+            background-color: rgb(196, 65, 65);
+        }
+    </style>
+
+   <div class="horror-glitch">
+    <div class="corrupted-text">
+    ENCONTRE-NOS
+    AJUDE-NOS
+    LIBERTE-NOS DELE
+    SALVE-NOS
+    ENCON-
+    </div>
+
+        <div class="infection-layer" id="infectionLayer" ></div>
+
+
+</div>
+
+</div>
+</body>
+
+</html>
+
+<script>
+const layer = document.getElementById("infectionLayer");
+
+const text = "ENCONTRE-NOS";
+
+function createVirus() {
+
+    const copy = document.createElement("div");
+
+    copy.className = "virus-copy";
+
+    copy.innerText = text;
+    copy.dataset.text = text;
+
+    /*
+     * Posição aleatória pela tela.
+     */
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+
+    /*
+     * Cada vírus nasce com deformações diferentes.
+     */
+    const rotation = (Math.random() - 0.5) * 80;
+    const skew = (Math.random() - 0.5) * 30;
+
+    const offsetX = Math.floor(
+        Math.random() * 20 - 10
+    ) + "px";
+
+    const offsetY = Math.floor(
+        Math.random() * 12 - 6
+    ) + "px";
+
+    /*
+     * Tempo de vida.
+     */
+    const life =
+        Math.random() * 1800 + 700;
+
+    copy.style.left = x + "%";
+    copy.style.top = y + "%";
+
+    copy.style.setProperty(
+        "--rotation",
+        rotation + "deg"
+    );
+
+    copy.style.setProperty(
+        "--skew",
+        skew + "deg"
+    );
+
+    copy.style.setProperty(
+        "--offset-x",
+        offsetX
+    );
+
+    copy.style.setProperty(
+        "--offset-y",
+        offsetY
+    );
+
+    copy.style.setProperty(
+        "--life",
+        life + "ms"
+    );
+
+    layer.appendChild(copy);
+
+
+    /*
+     * Remove depois que "morre".
+     */
+    setTimeout(() => {
+        copy.remove();
+    }, life + 100);
+}
+
+
+/*
+ * Infecção constante.
+ */
+setInterval(() => {
+
+    /*
+     * Às vezes nasce apenas um.
+     * Às vezes vários simultaneamente.
+     */
+
+    const amount =
+        Math.random() < 0.25
+            ? Math.floor(Math.random() * 6) + 4
+            : 1;
+
+    for (let i = 0; i < amount; i++) {
+        createVirus();
+    }
+
+}, 180);
+
+
+/*
+ * Infecção inicial.
+ */
+for (let i = 0; i < 10; i++) {
+    setTimeout(createVirus, i * 100);
+}
+</script>
